@@ -1,0 +1,11 @@
+# Ignoriere große Dateien und Verzeichnisse
+*.log
+*.md
+*.git
+.gitignore
+.env
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
