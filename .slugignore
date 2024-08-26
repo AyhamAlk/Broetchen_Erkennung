@@ -1,11 +1,17 @@
-# Ignoriere große Dateien und Verzeichnisse
-*.log
-*.md
-*.git
+# Ignoriere alle .git-Verzeichnisse
+.git/
 .gitignore
-.env
-venv/
-__pycache__/
+
+# Ignoriere alle Build- und Cache-Dateien
 *.pyc
+__pycache__/
 *.pyo
 *.pyd
+*.db
+*.sqlite
+
+# Ignoriere Entwicklungsabhängigkeiten
+*.egg-info/
+*.eggs/
+build/
+dist/
