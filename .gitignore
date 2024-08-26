@@ -1,0 +1,25 @@
+# Python Bytecode
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Environment Variables
+.env
+*.env
+
+# Git
+.git/
+
+# Logs
+*.log
+
+# MacOS
+.DS_Store
+
+# Node
+node_modules/
+
+# Python Virtual Environments
+venv/
+.env/
