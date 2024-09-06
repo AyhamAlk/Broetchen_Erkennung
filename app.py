@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import analyze_image  # Optional: Falls du ein externes Skript für die Bildanalyse hast
+import os
 
 app = Flask(__name__)
 
@@ -18,4 +19,5 @@ def upload():
     return "Fehler beim Hochladen des Bildes."
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    # Host auf '0.0.0.0' setzen und den Port von der Umgebungsvariable lesen
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 8080)), debug=True)
