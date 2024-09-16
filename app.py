@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-import analyze_image  # Optional: Falls du ein externes Skript für die Bildanalyse hast
+# import analyze_image  # Optional: Falls du ein externes Skript für die Bildanalyse hast
 import os
 
 app = Flask(__name__, template_folder='templates')  # Den 'templates'-Ordner korrekt referenzieren
@@ -14,8 +14,8 @@ def upload():
         file = request.files['image']
         if file:
             # Datei im Stream verarbeiten, um Speicher zu sparen
-            result = analyze_image.analyze(file.stream)  # Bildanalyse wird auf den Stream angewendet
-            return f"Ergebnis der Analyse: {result}"
+            # result = analyze_image.analyze(file.stream)  # Bildanalyse wird auf den Stream angewendet
+            return f"Ergebnis der Analyse:"
     return "Fehler beim Hochladen des Bildes."
 
 if __name__ == "__main__":
