@@ -4,24 +4,20 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Blackhand&display=swap">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bäckerei Die Drei Duman</title>
-    <!-- Verwende Flask's url_for, um die CSS-Datei korrekt zu verlinken -->
+    <title>Ergebnis der Bildanalyse</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
     <div class="container">
         <header>
-            <!-- Verwende Flask's url_for, um das Bild korrekt zu verlinken -->
             <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="Bäckerei Logo" class="logo">
         </header>
         <div class="content">
-            <h1>Willkommen in der Bäckerei!</h1>
-            <p>Laden Sie Ihre Datei hier hoch:</p>
-            <button id="uploadButton">hier Datei auswählen</button>
-            <input type="file" id="fileInput" style="display: none;">
+            <h1>Bildanalyse abgeschlossen</h1>
+            <p>Das hochgeladene Bild: <strong>{{ filename }}</strong></p>
+            <p>Ergebnis der Analyse: <strong>{{ result }}</strong></p>
+            <a href="/">Zurück zur Startseite</a>
         </div>
     </div>
-    <!-- Verwende Flask's url_for, um die JS-Datei korrekt zu verlinken -->
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

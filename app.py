@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request
 import os
-import analyze_image  # Dein externes Skript zur Bildanalyse
+from analyze_image import analyze
 
-app = Flask(__name__, template_folder='templates')
+app = Flask(__name__, static_folder='static', template_folder='templates')
 
 @app.route('/')
 def index():
@@ -13,9 +13,10 @@ def upload():
     if request.method == 'POST':
         file = request.files['image']
         if file:
-            # Analyse des Bildes mit dem externen Skript
-            result = analyze_image.analyze(file.stream)
-            return f"Ergebnis der Analyse: {result}"
+            # Bild analysieren
+            result = analyze(file.stream)
+            filename = file.filename
+            return render_template('result.html', filename=filename, result=result)
     return "Fehler beim Hochladen des Bildes."
 
 if __name__ == "__main__":
