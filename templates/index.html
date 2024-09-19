@@ -1,31 +1,35 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Blackhand&display=swap">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bild Upload</title>
+    <title>Bäckerei Die Drei Duman</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
     <div class="container">
-        <h1>Bild Upload und Ergebnis</h1>
-        <form action="/upload" method="POST" enctype="multipart/form-data">
-            <input type="file" name="image" required>
-            <button type="submit">Bild hochladen</button>
-        </form>
+        <header>
+            <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="Bäckerei Logo" class="logo">
+        </header>
+        <div class="content">
+            <h1>Willkommen in der Bäckerei!</h1>
+            <p>Laden Sie Ihre Datei hier hoch:</p>
+            <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
+                <input type="file" id="fileInput" name="image" required>
+                <button type="submit">Bild hochladen</button>
+            </form>
 
-        <!-- Wenn ein Bild hochgeladen wurde -->
-        {% if image_url and result %}
-        <div class="result">
-            <h2>Hochgeladenes Bild:</h2>
-            <img src="{{ image_url }}" alt="Hochgeladenes Bild" style="max-width:300px;">
-            <h2>Ergebnis:</h2>
-            <p>{{ result }}</p>
+            {% if image_url and result %}
+            <div class="result">
+                <h2>Hochgeladenes Bild:</h2>
+                <img src="{{ image_url }}" alt="Hochgeladenes Bild" class="uploaded-image" style="max-width: 400px; display: block;">
+                <h2>Ergebnis:</h2>
+                <p>{{ result }}</p>
+            </div>
+            {% endif %}
         </div>
-        {% endif %}
     </div>
-
-    <!-- Skript, um sicherzustellen, dass JS richtig eingebunden wird -->
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
