@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bäckerei Die Drei Duman</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
     <div class="container">
         <header>
-            <img src="images/logo.svg" alt="Bäckerei Logo" class="logo">
+            <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="Bäckerei Logo" class="logo">
         </header>
         <div class="content">
             <h1>Willkommen in der Bäckerei!</h1>
@@ -22,13 +22,13 @@
             {% if image_url and result %}
             <div class="result">
                 <h2>Hochgeladenes Bild:</h2>
-                <img src="{{ image_url }}" alt="Hochgeladenes Bild" style="max-width: 300px;">
+                <img src="{{ image_url }}" alt="Hochgeladenes Bild" class="uploaded-image">
                 <h2>Ergebnis:</h2>
                 <p>{{ result }}</p>
             </div>
             {% endif %}
         </div>
     </div>
-    <script src="js/script.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
