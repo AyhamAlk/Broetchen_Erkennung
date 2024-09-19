@@ -15,9 +15,11 @@ def index():
 def upload():
     if 'image' not in request.files:
         return redirect(request.url)
+    
     file = request.files['image']
     if file.filename == '':
         return redirect(request.url)
+    
     if file:
         # Speichern der Datei im Upload-Ordner
         filepath = os.path.join(UPLOAD_FOLDER, file.filename)
