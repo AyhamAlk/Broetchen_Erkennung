@@ -16,20 +16,21 @@
             <h1>Willkommen in der Bäckerei!</h1>
             <p>Laden Sie Ihre Datei hier hoch:</p>
             <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
-                <input type="file" id="fileInput" name="image">
+                <input type="file" id="fileInput" name="image" required>
                 <button type="submit">Bild hochladen</button>
             </form>
 
             {% if image_url and result %}
             <div class="result">
-                <h2>Hochgeladenes Bild:</h2>
-                <img src="{{ image_url }}" alt="Hochgeladenes Bild" class="uploaded-image" style="max-width: 400px; display: block;">
+                <h2>Analyse-Ergebnis</h2>
+                <img src="{{ image_url }}" alt="Hochgeladenes Bild" style="max-width: 100%; height: auto;">
                 <h2>Ergebnis:</h2>
                 <p>{{ result }}</p>
             </div>
             {% endif %}
         </div>
     </div>
+
     <script>
         document.getElementById('uploadForm').addEventListener('submit', function (e) {
             var fileInput = document.getElementById('fileInput');
