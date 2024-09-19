@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for, redirect
+from flask import Flask, render_template, request, url_for, redirect, jsonify
 import os
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
@@ -13,23 +13,23 @@ def index():
 
 @app.route('/upload', methods=['POST'])
 def upload():
-    # Prüfen, ob eine Datei im Formular enthalten ist
     if 'image' not in request.files:
-        return redirect(request.url)
+        return jsonify({'error': 'Keine Datei gefunden!'}), 400
     
     file = request.files['image']
     
-    # Prüfen, ob ein Dateiname existiert
     if file.filename == '':
-        return redirect(request.url)
+        return jsonify({'error': 'Keine Datei ausgewählt!'}), 400
     
-    # Datei speichern und Pfad erstellen
     if file:
         filepath = os.path.join(UPLOAD_FOLDER, file.filename)
         file.save(filepath)
 
         # Dummy Ergebnis zurückgeben und hochgeladenes Bild anzeigen
-        return render_template('index.html', image_url=url_for('static', filename='uploads/' + file.filename), result="Dummy Ergebnis")
+        return jsonify({
+            'image_url': url_for('static', filename='uploads/' + file.filename),
+            'result': "Dummy Ergebnis"
+        })
 
 if __name__ == '__main__':
     app.run(debug=True)

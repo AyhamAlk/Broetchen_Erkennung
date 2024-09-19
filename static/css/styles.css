@@ -69,3 +69,9 @@ p {
 input[type="file"] {
     display: none;
 }
+
+.uploaded-image, .result img {
+    max-width: 100%;
+    max-height: 400px; /* Du kannst hier die gewünschte maximale Höhe einstellen */
+    height: auto; /* Beibehaltung des Seitenverhältnisses */
+}

@@ -17,8 +17,10 @@ document.getElementById('fileInput').addEventListener('change', function(event) 
             if (data.error) {
                 alert(`Fehler: ${data.error}`);
             } else {
-                // Hier wird die Seite umgeleitet zu /result mit den Ergebnissen
-                window.location.href = `/result?image_url=${encodeURIComponent(data.image_url)}&result=${encodeURIComponent(data.result)}`;
+                // Ergebnisse anzeigen
+                document.getElementById('result').style.display = 'block';
+                document.getElementById('uploadedImage').src = data.image_url;
+                document.getElementById('resultText').textContent = data.result;
             }
         })
         .catch(error => {
