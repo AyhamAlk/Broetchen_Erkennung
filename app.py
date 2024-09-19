@@ -3,7 +3,6 @@ import os
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
 
-# Sicherstellen, dass der Upload-Ordner existiert
 UPLOAD_FOLDER = 'static/uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
@@ -24,7 +23,7 @@ def upload():
         # Speichern der Datei im Upload-Ordner
         filepath = os.path.join(UPLOAD_FOLDER, file.filename)
         file.save(filepath)
-        # Dummy-Ergebnis zurückgeben
+        # Dummy Ergebnis anzeigen
         return render_template('index.html', image_url=url_for('static', filename='uploads/' + file.filename), result='Dummy Ergebnis')
 
 if __name__ == "__main__":
