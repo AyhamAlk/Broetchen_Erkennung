@@ -16,7 +16,7 @@
             <h1>Willkommen in der Bäckerei!</h1>
             <p>Laden Sie Ihre Datei hier hoch:</p>
             <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
-                <input type="file" id="fileInput" name="image" required>
+                <input type="file" id="fileInput" name="image">
                 <button type="submit">Bild hochladen</button>
             </form>
 
@@ -30,6 +30,15 @@
             {% endif %}
         </div>
     </div>
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', function (e) {
+            var fileInput = document.getElementById('fileInput');
+            if (!fileInput.value) {
+                fileInput.focus();
+                e.preventDefault();
+                alert('Bitte ein Bild auswählen!');
+            }
+        });
+    </script>
 </body>
 </html>
