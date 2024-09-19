@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Blackhand&display=swap">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ergebnis der Bildanalyse</title>
+    <title>Bäckerei Die Drei Duman</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
@@ -13,11 +13,30 @@
             <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="Bäckerei Logo" class="logo">
         </header>
         <div class="content">
-            <h1>Bildanalyse abgeschlossen</h1>
-            <p>Das hochgeladene Bild: <strong>{{ filename }}</strong></p>
-            <p>Ergebnis der Analyse: <strong>{{ result }}</strong></p>
-            <a href="/">Zurück zur Startseite</a>
+            <h1>Willkommen in der Bäckerei!</h1>
+            <p>Laden Sie Ihre Datei hier hoch:</p>
+            <button id="uploadButton">Hier Datei auswählen</button>
+            <input type="file" id="fileInput" style="display: none;" onchange="uploadFile()">
         </div>
     </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        function uploadFile() {
+            var fileInput = document.getElementById('fileInput');
+            var file = fileInput.files[0];
+            var formData = new FormData();
+            formData.append('image', file);
+
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            }).then(response => response.text())
+              .then(data => {
+                  document.body.innerHTML = data;
+              }).catch(error => {
+                  console.error('Fehler:', error);
+              });
+        }
+    </script>
 </body>
 </html>

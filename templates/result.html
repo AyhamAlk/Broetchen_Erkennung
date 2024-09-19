@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Blackhand&display=swap">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ergebnis der Bildanalyse</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="Bäckerei Logo" class="logo">
+        </header>
+        <div class="content">
+            <h1>Bildanalyse abgeschlossen</h1>
+            <p>Das hochgeladene Bild: <strong>{{ filename }}</strong></p>
+            <p>Ergebnis der Analyse: <strong>{{ result }}</strong></p>
+            <a href="/">Zurück zur Startseite</a>
+        </div>
+    </div>
+</body>
+</html>
