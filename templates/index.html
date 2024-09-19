@@ -4,13 +4,13 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Blackhand&display=swap">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bäckerei Die Drei Duman </title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Bäckerei Die Drei Duman</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
     <div class="container">
         <header>
-            <img src="images/logo.svg" alt="Bäckerei Logo" class="logo">
+            <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="Bäckerei Logo" class="logo">
         </header>
         <div class="content">
             <h1>Willkommen in der Bäckerei!</h1>
@@ -19,6 +19,6 @@
             <input type="file" id="fileInput" style="display: none;">
         </div>
     </div>
-    <script src="js/script.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

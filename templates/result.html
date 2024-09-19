@@ -3,18 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analyse-Ergebnis</title>
+    <title>Ergebnis</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Analyse-Ergebnis</h1>
+            <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="Bäckerei Logo" class="logo">
         </header>
         <div class="content">
-            <p>Bild erfolgreich hochgeladen: <strong>{{ filename }}</strong></p>
-            <p>Ergebnis der Analyse: <strong>{{ result }}</strong></p>
-            <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Hochgeladenes Bild">
+            <h1>Analyse-Ergebnis</h1>
+            <p><strong>Bild:</strong></p>
+            <img src="{{ image_url }}" alt="Hochgeladenes Bild" style="max-width: 100%; height: auto;">
+            <p><strong>Ergebnis:</strong></p>
+            <p>{{ result }}</p>
+            <a href="/">Zurück zur Startseite</a>
         </div>
     </div>
 </body>
