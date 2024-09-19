@@ -1,32 +1,29 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 import os
 
-app = Flask(__name__, template_folder='templates')
+app = Flask(__name__, template_folder='templates', static_folder='static')
+
+# Sicherstellen, dass der Upload-Ordner existiert
 UPLOAD_FOLDER = 'static/uploads'
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 @app.route('/')
 def index():
-    return render_template('index.html', image_url=None, result=None)
+    return render_template('index.html')
 
 @app.route('/upload', methods=['POST'])
 def upload():
     if 'image' not in request.files:
-        return render_template('index.html', image_url=None, result="Kein Bild hochgeladen.")
-    
+        return redirect(request.url)
     file = request.files['image']
     if file.filename == '':
-        return render_template('index.html', image_url=None, result="Kein Bild ausgewählt.")
-    
+        return redirect(request.url)
     if file:
-        filename = file.filename
-        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        # Speichern der Datei im Upload-Ordner
+        filepath = os.path.join(UPLOAD_FOLDER, file.filename)
         file.save(filepath)
-        
-        # Dummy-Ergebnis
-        dummy_result = "Dies ist ein Dummy-Ergebnis."
-
-        return render_template('index.html', image_url=f"/static/uploads/{filename}", result=dummy_result)
+        # Dummy-Ergebnis zurückgeben
+        return render_template('index.html', image_url=url_for('static', filename='uploads/' + file.filename), result='Dummy Ergebnis')
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
