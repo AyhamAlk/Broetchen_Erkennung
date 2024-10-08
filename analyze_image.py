@@ -17,5 +17,5 @@ def analyze(img_stream):
     # Vorhersage machen
     predictions = model.predict(img_array)
     
-    # Ergebnisse zurückgeben (kann angepasst werden)
+    # Ergebnisse zurückgeben
     return predictions
