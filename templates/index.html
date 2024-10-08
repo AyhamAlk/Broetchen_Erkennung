@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bäckerei Die Drei Duman</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        body {
+            color: black; /* Setzt die Schriftfarbe auf schwarz */
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -15,9 +20,13 @@
         <div class="content">
             <h1>Willkommen in der Bäckerei!</h1>
             <p>Laden Sie Ihre Datei hier hoch:</p>
-            <input type="file" id="fileInput" style="display: none;">
-            <button id="uploadButton">Bild hochladen</button>
-            
+            <form id="uploadForm" enctype="multipart/form-data">
+                <input type="file" id="fileInput" name="image" accept="image/*" required>
+                <button type="submit" id="uploadButton">Bild hochladen</button>
+            </form>
+
+            <div id="loading" style="display: none;">Lade...</div>
+
             <div class="result" id="result" style="display: none;">
                 <h2>Analyse-Ergebnis</h2>
                 <img id="uploadedImage" src="" alt="Hochgeladenes Bild" style="max-width: 100%; height: auto;">
@@ -28,5 +37,26 @@
     </div>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        document.getElementById('uploadForm').onsubmit = async function(event) {
+            event.preventDefault(); // Verhindere die Standard-Formularübermittlung
+
+            const formData = new FormData(this);
+            const response = await fetch('/upload', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                document.getElementById('uploadedImage').src = data.image_url;
+                document.getElementById('resultText').innerText = data.result;
+                document.getElementById('result').style.display = 'block'; // Ergebnisbereich anzeigen
+            } else {
+                const errorData = await response.json();
+                alert(errorData.error || 'Ein Fehler ist aufgetreten!');
+            }
+        };
+    </script>
 </body>
 </html>
